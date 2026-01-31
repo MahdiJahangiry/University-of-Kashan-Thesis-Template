@@ -1,0 +1,385 @@
+%===========================================================
+%============ Good Thoughts, Good Words, Good Deeds ============
+%===========================================================
+% Template: University of Kashan Thesis Template (XePersian)
+% Author:   Mahdi Jahangiri (Open Source Contributor)
+% GitHub:       https://github.com/MahdiJahangiry
+% License:  MIT License
+% Description: Professional thesis template with XePersian support.
+% ==============================================================================
+
+
+
+\documentclass[12pt, onecolumn, twoside, a4paper]{report}
+
+%===========================================================
+% 0. USER CONFIGURATION (اطلاعات خود را اینجا وارد کنید)
+%===========================================================
+\newcommand{\MyTitle}{عنوان پایان‌نامه شما در این قسمت قرار می‌گیرد}
+\newcommand{\MyEnTitle}{Thesis Title Goes Here}
+\newcommand{\MyName}{نام دانشجو}
+\newcommand{\MyEnName}{Student Name}
+\newcommand{\MySupervisor}{دکتر نام استاد راهنما}
+\newcommand{\MyEnSupervisor}{Dr. Supervisor Name}
+\newcommand{\MyDepartment}{دانشکده علوم مالی، مدیریت و کارآفرینی}
+\newcommand{\MyField}{مدیریت کسب‌وکار گرایش عملیات و زنجیره تأمین}
+\newcommand{\MyEnField}{Master of Business Administration (MBA)} % رشته انگلیسی
+\newcommand{\MyUniversity}{دانشگاه کاشان}
+
+%===========================================================
+% 1. CRITICAL PACKAGES & COLORS
+%===========================================================
+\usepackage[table,xcdraw]{xcolor}
+
+% --- Custom Color Definitions ---
+\definecolor{rowgray}{gray}{0.93} 
+\definecolor{processblue}{RGB}{230,240,250}
+\definecolor{decisiongray}{RGB}{245,245,245}
+\definecolor{startgreen}{RGB}{235,245,235}
+\definecolor{layer1color}{RGB}{235, 245, 251}
+\definecolor{layer2color}{RGB}{254, 249, 231}
+\definecolor{layer3color}{RGB}{232, 248, 245}
+\definecolor{mainblue}{RGB}{41, 128, 185}
+\definecolor{maingreen}{RGB}{39, 174, 96}
+\definecolor{mainorange}{RGB}{230, 126, 34}
+\definecolor{mainpurple}{RGB}{142, 68, 173}
+\definecolor{darkgray}{RGB}{52, 73, 94}
+\definecolor{pastleblue}{rgb}{0.8, 0.9, 1.0}
+\definecolor{azure4}{RGB}{131,139,139}
+\definecolor{deepblue}{RGB}{0, 50, 100} 
+\definecolor{me}{rgb}{2.04,0.52,0.1}
+
+%===========================================================
+% 2. GRAPHICS & TIKZ SETTINGS
+%===========================================================
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{shadows, positioning, fit, backgrounds, shapes, arrows.meta, calc, decorations.pathreplacing, shapes.geometric, shadows.blur}
+\usepackage{capt-of}
+\usepackage{dirtree}
+\usepackage{fontawesome5}
+
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
+
+% --- Custom TikZ Styles ---
+\tikzset{
+	basicbox/.style={rectangle, rounded corners=3pt, text width=3.0cm, minimum height=1.3cm, align=center, font=\footnotesize\bfseries, draw=darkgray!50, line width=1pt, blur shadow={shadow blur steps=5}},
+	entitybox/.style={basicbox, top color=white, bottom color=layer1color!80!mainblue, text=darkgray},
+	fibox/.style={basicbox, text width=5.0cm, minimum height=1.5cm, top color=white, bottom color=mainblue!30, draw=mainblue, line width=1.5pt, font=\small\bfseries},
+	groupbox/.style={basicbox, top color=white, bottom color=layer2color!80!mainorange, text=darkgray, font=\scriptsize\bfseries},
+	criteria/.style={rectangle, rounded corners, draw=mainorange!80, fill=white, dashed, font=\scriptsize, align=center, text width=2.5cm},
+	engine/.style={rectangle, rounded corners=15pt, minimum width=12.0cm, minimum height=5.0cm, draw=mainpurple, line width=2pt, top color=white, bottom color=mainpurple!15, align=center},
+	objective/.style={circle, draw=darkgray, line width=1pt, minimum size=2.1cm, font=\tiny\bfseries, align=center, fill=white, blur shadow, text width=1.6cm},
+	db/.style={cylinder, shape border rotate=90, aspect=0.25, draw=maingreen, line width=1.5pt, top color=white, bottom color=maingreen!30, minimum width=2.2cm, minimum height=2.8cm, align=center, font=\scriptsize},
+	finalbox/.style={basicbox, draw=maingreen!80!black, top color=white, bottom color=maingreen!40, font=\scriptsize\bfseries},
+	arrow/.style={-{Latex[length=3mm, width=2mm]}, line width=1.2pt, draw=darkgray!80},
+	bigarrow/.style={-{Latex[length=4mm, width=3mm]}, line width=2pt, draw=mainblue!60},
+	dashed_container/.style={rectangle, draw=blue!80, dashed, line width=0.25pt, rounded corners=5pt, inner sep=5pt},
+	layer_bg/.style={rounded corners=15pt, line width=1.5pt, inner sep=10pt},
+	input_label/.style={font=\scriptsize\bfseries, fill=white, inner sep=3pt, rounded corners, line width=0.8pt}
+}
+
+% Checkmark fix
+\def\checkmark{\tikz\fill[scale=0.4, color=maingreen](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+
+%===========================================================
+% 3. PAGE LAYOUT & GEOMETRY
+%===========================================================
+\usepackage[inner=2.5cm, outer=2cm, top=2.5cm, bottom=3.5cm, bindingoffset=0.5cm]{geometry}
+\usepackage{pdflscape}
+\usepackage{setspace} 
+\linespread{1.4}
+\setlength{\headheight}{30pt} 
+
+% Headers & Footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[R]{\leftmark}
+\fancyhead[L]{\scriptsize\rightmark}
+\renewcommand{\headrulewidth}{1pt}
+
+%===========================================================
+% 4. MATH, TABLES & UTILITIES
+%===========================================================
+\usepackage{amsmath, amssymb}
+\numberwithin{equation}{chapter}
+\usepackage{booktabs, makecell, multirow, multicol, array}
+\usepackage{float}
+\usepackage{ragged2e, ulem}
+\usepackage{fancyvrb}
+\usepackage{tcolorbox}
+\usepackage{zref-abspage}
+\usepackage{zref-perpage}
+\zmakeperpage{footnote}
+
+%===========================================================
+% DEFINED ENVIRONMENTS (BOXES)
+%===========================================================
+\tcbuselibrary{most} 
+
+\tcbset{
+	myboxstyle/.style={
+		standard,          
+		boxrule=0.5mm,
+		fonttitle=\bfseries,
+		fontupper=\normalfont,
+		separator sign dash,
+	}
+}
+
+% --- تعریف محیط‌های رنگی ---
+\newtcolorbox{defn}[2]{myboxstyle, colframe=blue!70!black, colback=blue!5, colbacktitle=blue!80!black, title={تعریف: #1}, label={#2}}
+\newtcolorbox{ex}[2]{myboxstyle, colframe=green!60!black, colback=green!5, colbacktitle=green!70!black, title={مثال: #1}, label={#2}}
+\newtcolorbox{purp}[2]{myboxstyle, colframe=azure4, colback=azure4!10, colbacktitle=azure4, title={اهداف: #1}, label={#2}}
+\newtcolorbox{ques}[2]{myboxstyle, colframe=yellow!60!black, colback=yellow!10, colbacktitle=yellow!70!black, title={سوالات: #1}, label={#2}}
+\newtcolorbox{cor}[2]{myboxstyle, colframe=orange!80!black, colback=orange!5, colbacktitle=orange!90!black, title={نتیجه: #1}, label={#2}}
+\newtcolorbox{note}[2]{myboxstyle, colframe=red!70!black, colback=red!5, colbacktitle=red!80!black, title={نکته مهم: #1}, label={#2}}
+
+% Column Types
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\mathlr}[1]{\text{\lr{#1}}}
+
+% Captions
+\usepackage[font=small, labelfont={bf, color=red}, justification=centering]{caption}
+\usepackage{subcaption}
+
+%===========================================================
+% 5. CODE LISTINGS & ALGORITHMS
+%===========================================================
+\usepackage{listings}
+\usepackage[ruled,vlined]{algorithm2e}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{professional_style}{
+	backgroundcolor=\color{backcolour},
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{blue}\bfseries,
+	numberstyle=\tiny\color{codegray}\ttfamily,
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\scriptsize,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	keepspaces=true,
+	numbers=left,
+	numbersep=10pt,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=1,
+	frame=lines,
+	rulecolor=\color{black},
+	framesep=5pt,
+	xleftmargin=5pt,
+	xrightmargin=5pt,
+	aboveskip=10pt,
+	belowskip=5pt
+}
+\lstset{style=professional_style}
+\captionsetup[lstlisting]{font={footnotesize}}
+
+%===========================================================
+% 6. BIBLIOGRAPHY SETUP
+%===========================================================
+\usepackage[nonamebreak, round]{natbib}
+\newcommand{\customcite}[1]{%
+	\citeauthor{#1}\footnotemark، \citeyear{#1}%
+	\LTRfootnotetext{\citeauthor*{#1}}%
+}
+
+% Fix bibliography numbering
+\makeatletter
+\newcounter{mybibcount}
+\let\oldbibitem\bibitem
+\let\oldthebibliography\thebibliography
+\renewcommand{\thebibliography}[1]{%
+	\oldthebibliography{#1}%
+	\setlength{\leftmargin}{3.5em}
+	\setlength{\itemindent}{0pt}
+}
+\renewcommand{\bibitem}[2][]{%
+	\stepcounter{mybibcount}%
+	\oldbibitem[#1]{#2}%
+	\hspace*{-0.2em}%
+	\makebox[1.5em][l]{\textcolor{blue!60!black}{\textbf{\themybibcount.}}}%
+	\hspace{0.5em}%
+}
+\makeatother
+
+%===========================================================
+% 7. XEPERSIAN & FONTS (MUST BE LAST)
+%===========================================================
+\usepackage[colorlinks, citecolor=blue, urlcolor=blue, linkcolor=blue, hypertexnames=true, unicode=true, pdfusetitle=true]{hyperref}
+\usepackage{xepersian}
+
+% Font Configuration (Ensure these fonts are installed)
+\settextfont[Scale=1.2]{B Nazanin}
+\setlatintextfont[Scale=1, AutoFakeSlant=0.2, AutoFakeBold=1.5]{Times New Roman}
+\setdigitfont{XB Zar}
+\newfontface\pagenumfont{XB Zar}
+
+% Fixes & Localizations
+\renewcommand{\lstlistingname}{\rl{قطعه‌کد}}
+\renewcommand{\lstlistlistingname}{فهرست قطعه‌کدها}
+
+% Advanced Equation Numbering Fix (Persian Style)
+\makeatletter
+\let\old@equation\equation
+\let\old@endequation\endequation
+\renewenvironment{equation}{%
+	\begin{latin}%
+		\old@equation%
+	}{%
+		\old@endequation%
+	\end{latin}%
+}
+\let\oldtheequation\theequation
+\renewcommand{\theequation}{\rl{\oldtheequation}}
+\def\tagform@#1{\maketag@@@{\rl{(#1)}\@@italiccorr}}
+\renewcommand\@makefnmark{\textsuperscript{\LR{\@thefnmark}}}
+\renewcommand\@makefntext[1]{\noindent\hb@xt@4em{\hss\LR{\@thefnmark}\,}#1}
+\makeatother
+
+% Depths
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+\renewcommand{\labelitemi}{{\fontspec{Times New Roman}\textbullet}}
+\renewcommand{\labelitemii}{{\fontspec{Times New Roman}\textendash}}
+\renewcommand{\labelenumi}{{\fontspec{Times New Roman}\arabic{enumi}.}}
+
+%===========================================================
+% 8. DOCUMENT CONTENT
+%===========================================================
+\begin{document}
+	
+	% --- Persian Title Page ---
+	\begin{titlepage}
+		\centering
+		% Ensure you have a logo.png in ./images/ folder
+		\includegraphics[width=0.3\textwidth]{./images/logo.png}\\[0.5cm]
+		
+		{\large \MyDepartment}\\[1cm]
+		{\large پایان نامه کارشناسی ارشد در رشته \MyField}\\[1cm]
+		
+		\textbf{\MyTitle}\\[2cm]
+		
+		\textbf{استاد راهنما:}\\
+		{\MySupervisor}\\[1.5cm]
+		
+		\textbf{نگارنده:}\\
+		{\MyName}\\[4cm]
+		
+		{\today}
+	\end{titlepage}
+	
+	\newpage
+	\thispagestyle{empty}
+	% Ensure you have benameoo.png in ./images/ folder
+	\includegraphics[height=19cm]{./images/benameoo.png} 
+	\newpage
+	\clearpage
+	\pagenumbering{harfi}
+	
+	% --- Defense Minutes ---
+	\chapter*{{\Large صورت جلسه دفاع از پایان‌نامه}}
+	(محل قرارگیری فرم صورت‌جلسه دفاع)
+	
+	% --- Commitment ---
+	\chapter*{تعهد نامه}
+	اینجانب \textbf{\MyName} با آگاهی کامل از رویه‌های اخلاقی در پژوهش، متعهد می‌شوم که:
+	\begin{enumerate}
+		\item مطالب مندرج در این پایان‌نامه حاصل پژوهش اینجانب بوده و صحت مطالب تأیید می‌شود.
+		\item حقوق مادی و معنوی دانشگاه رعایت شده است.
+		\item (سایر بندهای تعهدنامه طبق فرمت دانشگاه...)
+		
+		\vspace{2cm}
+		\begin{tikzpicture}[remember picture, overlay]
+			\node at (current page.south) [xshift=-5cm, yshift=4cm, anchor=south east] {\textbf{امضاء دانشجو}};
+		\end{tikzpicture}
+	\end{enumerate}
+	
+	% --- Dedication ---
+	\chapter*{تقدیم به}
+
+	\vspace{3cm}
+	تقدیم به پدر و مادر عزیزم...\\
+	و تمام کسانی که در این راه مرا یاری کردند.
+	
+	% --- Acknowledgments ---
+	\chapter*{سپاسگزاری}
+	لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
+	
+	% --- Abstract (Persian) ---
+	\chapter*{چکیده}
+	لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.
+	
+	\vspace{1cm}
+	\noindent \textbf{واژگان کلیدی:} کلمه کلیدی ۱، کلمه کلیدی ۲، کلمه کلیدی ۳.
+	
+	% --- TOC/LOT/LOF ---
+	\tableofcontents
+	\listoftables
+	\listoffigures
+	\lstlistoflistings
+	\clearpage
+	\pagenumbering{arabic}
+	
+	%===========================================================
+	% 9. CHAPTERS INCLUSION
+	%===========================================================
+	\include{chapters/chapter1}
+	\include{chapters/chapter2}
+	\include{chapters/chapter3}
+	\include{chapters/chapter4}
+	\include{chapters/chapter5}
+	
+	% Appendices (Optional)
+	% \appendix
+	% \include{chapters/appendix}
+	
+	%===========================================================
+	% 10. BIBLIOGRAPHY
+	%===========================================================
+	% This template uses 'asa-fa' style by default (Author-Year)
+	\bibliographystyle{asa-fa}
+	\bibliography{ref.bib}
+	
+	% --- English Abstract & Title ---
+	\newpage
+	\begin{latin}
+		\chapter*{\vspace*{-3.5cm} Abstract}
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		
+		\vspace{0.5cm}
+		\noindent \textbf{Keywords:} Keyword 1, Keyword 2, Keyword 3.
+		\enlargethispage{1cm}
+		
+		\begin{titlepage}
+			\centering
+			% Ensure en-logo.jpg exists in ./images/
+			\includegraphics[width=0.3\textwidth]{./images/en-logo.jpg}\\[0.5cm]
+			
+			{\normalsize Faculty of Financial Sciences, Management, and Entrepreneurship}\\[1cm]
+			{\normalsize Master Thesis in \MyEnField}\\[1cm]
+			
+			\textbf{\MyEnTitle}\\[2cm]
+			
+			{\normalsize \textbf{Supervisor: }}\\
+			{\normalsize \MyEnSupervisor}\\[1.5cm]
+			
+			{\normalsize \textbf{By: }}\\
+			{\normalsize \MyEnName}\\[4cm]
+			
+			\renewcommand{\today}{\number\year/\number\month/\number\day}
+			\lr{\today}
+		\end{titlepage}
+	\end{latin}
+	
+\end{document}

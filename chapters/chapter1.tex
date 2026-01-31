@@ -1,0 +1,150 @@
+%===========================================================
+% File: chapters/chapter1.tex
+% Title: Template User Guide (Final Version with English Comments)
+%===========================================================
+
+\chapter{راهنمای نگارش و استفاده از قالب}% کلیات پژوهش
+
+\section{مقدمه}
+این فصل به عنوان راهنمای عملی برای استفاده از این قالب نگارش شده است. هدف از ارائه این قالب، استانداردسازی پایان‌نامه‌ها و کاهش دغدغه‌های دانشجویان در صفحه‌آرایی است تا بتوانند بر محتوای علمی خود تمرکز کنند. در ادامه، نحوه استفاده از امکانات مختلف این قالب با ذکر مثال توضیح داده می‌شود.
+
+\section{نحوه نگارش متن (فارسی و انگلیسی)}
+این قالب بر پایه بسته قدرتمند \lr{XePersian} طراحی شده است. اصول کلی نگارش به شرح زیر است:
+
+\begin{itemize}
+	\item \textbf{متن فارسی:} به صورت عادی تایپ می‌شود و راست‌چین است.
+	\item \textbf{کلمات انگلیسی وسط متن:} باید حتماً درون دستور \verb|\lr{...}| قرار گیرند.
+	\item \textbf{پاراگراف کامل انگلیسی:} (مانند چکیده انگلیسی یا کدهای طولانی) باید درون محیط \texttt{latin} قرار گیرند.
+\end{itemize}
+
+\begin{ex}{مثال نگارش صحیح}{text_example}
+	درست: برای پردازش تصویر از کتابخانه \lr{OpenCV} استفاده کردیم.\\
+	نادرست: برای پردازش تصویر از کتابخانه \lr{OpenCV} استفاده کردیم. (این حالت باعث به‌هم‌ریختگی متن می‌شود).
+\end{ex}
+
+\section{فرمول‌نویسی ریاضی}
+یکی از نقاط قوت \lr{\LaTeX}، کیفیت بالای فرمول‌های ریاضی است. در این قالب، شماره‌گذاری فرمول‌ها به صورت خودکار و فارسی انجام می‌شود.
+
+\subsection{فرمول‌های درون‌خطی}
+برای نوشتن فرمول در میان متن از علامت دلار ($\$$) استفاده کنید. 
+مثال: رابطه فیثاغورس به صورت
+ $a^2 + b^2 = c^2$
+  است که در هندسه کاربرد دارد.
+
+\subsection{فرمول‌های جداگانه (شماره‌دار)}
+برای فرمول‌های مهم که باید در سطر جداگانه و با شماره باشند، از محیط \texttt{equation} استفاده کنید. برای ارجاع به فرمول، حتماً از \verb|\label{...}| استفاده کنید:
+
+\begin{equation}
+	\label{eq:fourier}
+	f(x) = \int_{-\infty}^{\infty} \hat{f}(\xi)\,e^{2\pi i \xi x} \,d\xi
+\end{equation}
+
+همانطور که در رابطه \eqref{eq:fourier} مشاهده می‌کنید، ارجاع به فرمول‌ها نیز با دستور \verb|\eqref{...}| به راحتی انجام می‌شود و شماره فرمول به صورت خودکار لینک می‌شود.
+
+\section{جداول و تصاویر}
+
+\subsection{درج تصاویر}
+برای قرار دادن تصویر، از محیط \texttt{figure} استفاده کنید. تصاویر باید در پوشه \lr{\texttt{images}} ذخیره شده باشند. همیشه برای تصاویر \verb|\caption| و \verb|\label| تعریف کنید.
+
+\begin{figure}[ht]
+	\centering
+	% Replace 'logo.png' with your own image file name
+	\includegraphics[width=0.3\textwidth]{./images/logo.png}
+	\caption{نمونه درج تصویر لوگوی دانشگاه}
+	\label{fig:logo_sample}
+\end{figure}
+
+با توجه به شکل \ref{fig:logo_sample}، توضیحات تصویر باید در پایین آن قرار گیرد.
+
+\subsection{رسم جداول}
+این قالب از بسته \lr{booktabs} برای خطوط زیبا و بسته \lr{xcolor} برای رنگ‌آمیزی سطرها پشتیبانی می‌کند.
+
+\begin{table}[ht]
+	\centering
+	\caption{نمونه یک جدول استاندارد با سطرهای رنگی}
+	\label{tab:sample_table}
+	\small
+	% Set row colors (alternating light gray and white)
+	\rowcolors{2}{rowgray}{white}
+	\begin{tabular}{c r c}
+		\toprule
+		\textbf{ردیف} & \textbf{متغیر} & \textbf{مقدار} \\
+		\midrule
+		۱ & فشار اولیه & $100$ \lr{Pa} \\
+		۲ & دمای محیط & $25$ \lr{C} \\
+		۳ & چگالی & $1.2$ \lr{g/cm} \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\section{باکس‌های اختصاصی قالب}
+در این قالب، محیط‌های رنگی جذابی برای تعاریف، اهداف و نکات مهم تعریف شده است. ساختار کلی استفاده به صورت زیر است:\\
+\verb|\begin{BoxName}{Title}{Label} ... \end{BoxName}|
+
+\subsection{باکس تعریف (\lr{Definition})}
+\begin{defn}{الگوریتم ازدحام ذرات}{def_pso}
+	الگوریتم ازدحام ذرات یا \lr{PSO}، یک روش بهینه‌سازی فراابتکاری است که از رفتار اجتماعی دسته‌های پرندگان برای یافتن بهینه سراسری الهام گرفته شده است.
+\end{defn}
+
+\subsection{باکس اهداف (\lr{Purpose})}
+\begin{purp}{اهداف پژوهش}{purp_thesis}
+	\begin{enumerate}
+		\item بررسی ادبیات موضوع و روش‌های پیشین.
+		\item ارائه مدل ریاضی جدید برای زنجیره تأمین.
+		\item حل مدل با استفاده از الگوریتم‌های فراابتکاری.
+	\end{enumerate}
+\end{purp}
+
+\section{نحوه درج کد (\lr{Listing})}
+برای نمایش کدهای برنامه‌نویسی، از محیط \texttt{lstlisting} استفاده کنید. این محیط در این قالب بهینه‌سازی شده تا کدهای طولانی را بشکند و از صفحه خارج نشود.
+
+% Local settings to ensure correct display (LTR direction mandatory)
+\begin{latin}
+	\begin{lstlisting}[
+		language=Python, 
+		caption={\lr{Sample code-space}}, 
+		label={code:python},
+		basicstyle=\ttfamily\footnotesize, % Code font size
+		breaklines=true, % Break long lines automatically
+		frame=lines, % Frame around code
+		numbers=left, % Line numbers on the left
+		numberstyle=\tiny\color{gray},
+		keywordstyle=\color{blue}\bfseries,
+		stringstyle=\color{green!50!black}
+		]
+		def optimize(data):
+		"""
+		This function optimizes the input data using a simple
+		multiplication heuristic. It handles large datasets efficiently.
+		"""
+		result = []
+		for item in data:
+		# A simple calculation demo
+		calc = item * 2 + 100 
+		result.append(calc)
+		
+		return result
+	\end{lstlisting}
+\end{latin}
+
+همانطور که در قطعه‌کد \ref{code:python} مشاهده می‌کنید، توضیحات فارسی در کپشن کد امکان‌پذیر است، اما بدنه کد باید انگلیسی باشد.
+
+\section{مدیریت مراجع}
+رفرنس‌دهی در این قالب با استفاده از \lr{BibTeX} انجام می‌شود. فایل مراجع در \lr{\texttt{ref.bib}} قرار دارد.
+
+\begin{itemize}
+	\item \textbf{ارجاع داخل پرانتز:} دستور \verb|\citep{ref1}| $\leftarrow$ خروجی: (نام‌نویسنده، سال)
+	\item \textbf{ارجاع در متن:} دستور \verb|\citet{ref1}| $\leftarrow$ خروجی: نام‌نویسنده (سال)
+\end{itemize}
+
+
+به طور مثال: 
+ \citep{schumpeter1934}
+ 
+
+فقط دقت کنید در فایل \lr{ref.bib}  یک لاین جدید اضافه کنید به نام: \lr{authorfa}  و داخلش همانند نمونه نام فارسی نویسنده را بنویسید. اگر چندین نویسنده داشتین بعد از نام هر نویسنده یک فاصله و واژه \lr{and} را بنویسید. نکته مهم اینکه در نوشتن نامهای فارسی فاصله بین کاراکتر‌های یک نام نباشد و به صورت نیم فاصله وارد کنید. مثلا: علی‌رضا.
+
+
+استایل پیش‌فرض \lr{asa-fa} است، اما در فایل \lr{\texttt{main.tex}} راهنمای تغییر آن به سایر استایل‌ها (مانند \lr{IEEE} یا \lr{Chicago})
+ موجود است.
+ 
